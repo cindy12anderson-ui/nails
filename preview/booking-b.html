@@ -1,0 +1,405 @@
+<title>Nails&amp;Gel Maison</title>
+<meta name="description" content="Option B, full booking flow with the salon's real menu and policies, tightened, plus Apple Pay. Draft for approval.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Karla:wght@300;400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#F4F0EE; --surface:#FCFAF9; --ink:#2A2322; --muted:#665B58;
+  --line:#E2D7D2; --accent:#7A5A4E; --accent-soft:#F0E6E1; --photo:#E8DCD6;
+  --ok:#3E6B52; --warn:#8A4B2F;
+  --pay-bg:#000; --pay-fg:#fff;
+  --display:"Marcellus","Trajan Pro","Times New Roman",serif;
+  --body:"Karla","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#141111; --surface:#1D1918; --ink:#F2EBE8; --muted:#B5A9A5;
+    --line:#382F2D; --accent:#D6B4A5; --accent-soft:#2E2524; --photo:#2B2322;
+    --ok:#8CC7A5; --warn:#E3A488; --pay-bg:#fff; --pay-fg:#000;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#141111; --surface:#1D1918; --ink:#F2EBE8; --muted:#B5A9A5;
+  --line:#382F2D; --accent:#D6B4A5; --accent-soft:#2E2524; --photo:#2B2322;
+  --ok:#8CC7A5; --warn:#E3A488; --pay-bg:#fff; --pay-fg:#000;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;padding-inline:16px;padding-block:20px 56px}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.num{font-variant-numeric:tabular-nums}
+.draft{max-width:1040px;margin:0 auto 14px;display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;font-size:13px;color:var(--muted)}
+.draft b{color:var(--ink);font-weight:600}
+
+.card{max-width:1040px;margin-inline:auto;background:var(--surface);border:1px solid var(--line);outline:1px solid var(--line);outline-offset:-8px;padding:40px clamp(20px,4.5vw,52px) 44px}
+.mast{display:grid;grid-template-columns:1fr auto;gap:10px 24px;align-items:end;border-bottom:1px solid var(--ink);padding-bottom:18px}
+@media (max-width:680px){.mast{grid-template-columns:1fr}}
+.logo{font-family:var(--display);font-size:clamp(30px,5.5vw,46px);letter-spacing:.14em;line-height:1.05;text-transform:uppercase}
+.tagline{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.addr{font-size:14px;color:var(--muted);text-align:end}
+@media (max-width:680px){.addr{text-align:start}}
+
+.progress{display:flex;flex-wrap:wrap;gap:6px 18px;list-style:none;margin:18px 0 0;padding:0;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.progress li[aria-current="step"]{color:var(--ink);font-weight:700}
+.progress li.done{color:var(--accent)}
+
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:40px;margin-top:28px;align-items:start}
+@media (max-width:860px){.layout{grid-template-columns:1fr}}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance}
+h1{font-size:28px;letter-spacing:.04em}
+.sectionlabel{font-family:var(--display);font-size:14px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin:26px 0 4px}
+.lede{color:var(--muted);margin:6px 0 0;max-width:62ch}
+.back{background:none;border:0;padding:0;margin-bottom:12px;color:var(--muted);cursor:pointer;font-size:14px;letter-spacing:.08em;text-transform:uppercase}
+.back:hover{color:var(--ink)}
+
+/* Home */
+.cats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}
+@media (max-width:620px){.cats{grid-template-columns:1fr}}
+.cat{display:grid;gap:4px;text-align:start;padding:20px;border:1px solid var(--line);background:transparent;cursor:pointer;transition:border-color .2s}
+.cat:hover{border-color:var(--ink)}
+.cat .k{font-size:12px;letter-spacing:.2em;color:var(--muted)}
+.cat .t{font-family:var(--display);font-size:22px}
+.cat .s{font-size:14px;color:var(--muted)}
+.note{margin-top:22px;border-inline-start:2px solid var(--accent);padding:4px 0 4px 16px;display:grid;gap:4px;max-width:66ch}
+.note b{font-weight:600}
+.note p{margin:0;color:var(--muted);font-size:15px}
+.links{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:22px;font-size:13px;letter-spacing:.16em;text-transform:uppercase}
+.links a{color:var(--ink)}
+
+/* Services */
+.svc{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:6px 18px;align-items:start;padding:18px 0;border-bottom:1px solid var(--line)}
+@media (max-width:560px){.svc{grid-template-columns:72px minmax(0,1fr)}.svc .choose{grid-column:1/-1}}
+.ph{aspect-ratio:1;max-width:100%;background:var(--photo);display:grid;place-items:center;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:center;padding:4px}
+.svc h3{font-size:20px;letter-spacing:.02em}
+.meta{font-size:14px;color:var(--muted)}
+.price{font-weight:600}
+.price small{font-weight:400;color:var(--muted);font-size:14px}
+.svc p{margin:6px 0 0;font-size:15px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{font-size:12px;border:1px solid var(--line);padding:1px 8px;color:var(--muted)}
+.chip.good{color:var(--ok);border-color:currentColor}
+.chip.no{color:var(--warn);border-color:currentColor}
+.choose{border:1px solid var(--ink);background:var(--ink);color:var(--surface);padding:10px 18px;cursor:pointer;font-size:13px;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap}
+.choose.ghost{background:transparent;color:var(--ink)}
+.groupnote{background:var(--accent-soft);padding:12px 16px;font-size:15px;margin-top:14px}
+.flag{font-size:11px;letter-spacing:.06em;text-transform:uppercase;border:1px dashed var(--warn);color:var(--warn);padding:0 6px;margin-inline-start:6px}
+
+/* Technicians */
+.techs{display:grid;gap:10px;margin-top:16px}
+.tech{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px;align-items:center;text-align:start;padding:16px 18px;border:1px solid var(--line);background:transparent;cursor:pointer}
+.tech:hover,.tech[aria-pressed="true"]{border-color:var(--ink)}
+.tech[aria-pressed="true"]{background:var(--accent-soft)}
+.tech .n{font-family:var(--display);font-size:20px}
+.tech .r{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.tech .d{grid-column:1/-1;color:var(--muted);font-size:15px}
+
+/* Add-ons, calendar */
+.checks{display:grid;gap:8px;margin-top:10px}
+.check{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);cursor:pointer}
+.check input{width:18px;height:18px;margin-top:3px;accent-color:var(--ink);flex:none}
+.check .x{font-size:14px;color:var(--muted)}
+.cal{border:1px solid var(--line);padding:16px;margin-top:10px}
+.calhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.calhead b{font-family:var(--display);font-weight:400;font-size:19px}
+.calhead button{border:1px solid var(--line);background:transparent;width:36px;height:36px;cursor:pointer}
+.calhead button:disabled{opacity:.3;cursor:not-allowed}
+.grid7{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.dow{font-size:12px;letter-spacing:.1em;color:var(--muted);padding-block:4px}
+.day{aspect-ratio:1;border:1px solid transparent;background:transparent;cursor:pointer;display:grid;place-items:center;font-variant-numeric:tabular-nums;position:relative;min-width:0}
+.day:hover:not(:disabled){border-color:var(--line)}
+.day:disabled{color:var(--muted);opacity:.4;cursor:not-allowed}
+.day[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
+.day .we{position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--accent)}
+.legend{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:13px;color:var(--muted);margin-top:10px}
+.legend i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-inline-end:6px;vertical-align:middle}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;margin-top:12px}
+.slot{border:1px solid var(--line);background:transparent;padding:10px 4px;cursor:pointer;font-variant-numeric:tabular-nums}
+.slot:hover{border-color:var(--ink)}
+.slot[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+
+/* Form */
+.form{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+@media (max-width:560px){.form{grid-template-columns:1fr}}
+.field{display:grid;gap:6px;font-size:14px;font-weight:600}
+.field.full{grid-column:1/-1}
+.field input{padding:12px 14px;border:1px solid var(--line);background:var(--bg);font-weight:400}
+.field .hint{font-weight:400;color:var(--muted);font-size:13px}
+.phone{display:grid;grid-template-columns:auto 1fr;gap:0}
+.phone span{border:1px solid var(--line);border-inline-end:0;padding:12px;background:var(--bg);font-weight:400;color:var(--muted)}
+.policies{margin-top:22px;display:grid;gap:8px}
+details{border:1px solid var(--line)}
+summary{cursor:pointer;padding:12px 16px;display:flex;justify-content:space-between;gap:12px;font-family:var(--display);font-size:17px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--body);color:var(--muted)}
+details[open] summary::after{content:"–"}
+summary small{font-family:var(--body);font-size:13px;color:var(--muted);margin-inline-start:auto}
+.pbody{padding:0 16px 14px;font-size:15px}
+.pbody ol,.pbody ul{margin:6px 0 0;padding-inline-start:20px;display:grid;gap:4px}
+.pbody p{margin:6px 0 0}
+.korean{font-size:14px;color:var(--muted)}
+.cta{margin-top:18px;width:100%;border:1px solid var(--ink);background:var(--ink);color:var(--surface);padding:15px;cursor:pointer;font-size:14px;letter-spacing:.18em;text-transform:uppercase}
+.cta:disabled{opacity:.35;cursor:not-allowed}
+.why{font-size:13px;color:var(--muted);margin-top:8px;text-align:center}
+
+/* Payment */
+.paybox{display:grid;gap:12px;margin-top:16px;max-width:460px}
+.applepay{height:52px;border:0;background:var(--pay-bg);color:var(--pay-fg);font:600 20px/1 -apple-system,"SF Pro Text","Helvetica Neue",Arial,sans-serif;display:flex;align-items:center;justify-content:center;gap:5px;cursor:pointer}
+.applepay svg{width:18px;height:22px;fill:currentColor;margin-top:-3px}
+.gpay{height:52px;border:1px solid var(--line);background:transparent;font-weight:600;cursor:pointer}
+.or{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
+.cardfield{border:1px solid var(--line);background:var(--bg);display:grid}
+.cardfield div{padding:12px 14px;color:var(--muted)}
+.cardfield div+div{border-top:1px solid var(--line);display:flex;justify-content:space-between}
+.secure{font-size:13px;color:var(--muted);text-align:center}
+
+/* Summary */
+.summary{position:sticky;top:16px;border:1px solid var(--line);padding:20px;display:grid;gap:10px;align-content:start}
+.summary h2{font-size:18px;letter-spacing:.08em;text-transform:uppercase}
+.srow{display:flex;justify-content:space-between;gap:12px;font-size:15px}
+.srow span:first-child{color:var(--muted)}
+.srow.total{border-top:1px solid var(--line);padding-top:10px;font-weight:700}
+.srow.total span:first-child{color:var(--ink)}
+.empty{color:var(--muted);font-size:15px;margin:0}
+.done{text-align:center;padding-block:24px;display:grid;gap:10px;justify-items:center}
+.done .ring{width:64px;height:64px;border:1px solid var(--accent);border-radius:50%;display:grid;place-items:center;color:var(--accent);font-size:26px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="draft"><span><b>Option B · Maison</b>, full flow with the salon's real content, tightened. Draft for approval.</span><span>Photos and live availability come from Acuity in the real build.</span></div>
+
+<div class="card">
+  <header class="mast">
+    <div><div class="logo">Nails&amp;Gel</div><div class="tagline">Luxury nail bar &amp; spa · Korean hard gel specialists</div></div>
+    <div class="addr">Level 1, 179 Little Bourke St<br>Melbourne VIC 3000</div>
+  </header>
+  <ol class="progress" id="progress"></ol>
+  <div class="layout">
+    <main id="main" tabindex="-1" aria-live="polite"></main>
+    <aside class="summary" id="summary" aria-label="Your booking"></aside>
+  </div>
+</div>
+
+<script>
+const CATS=[
+ {id:"mani",k:"01",t:"Manicure",s:"Gel, BIAB, hard gel and nail art",note:"",items:[
+  {id:"express",n:"Express manicure",m:30,c:79,h:69,d:"E-file shaping and cuticle care, finished with nail serum.",chips:[["No gel","no"]]},
+  {id:"deluxe",n:"Deluxe manicure",m:30,c:89,h:79,d:"E-file nail and cuticle care with hand spa, scrub, massage and paraffin. Finished with nail serum.",chips:[["No gel","no"]]},
+  {id:"shellac",n:"Shellac manicure",m:35,c:89,h:79,d:"A lightweight gel polish for a clean, natural finish. Includes E-file manicure, single-colour gel and removal of our gel.",chips:[["No builder gel","no"],["No nail art or extensions","no"]]},
+  {id:"biab",n:"BIAB manicure",m:45,c:109,h:99,d:"Lightweight builder gel that strengthens and protects your natural nails. Includes E-file manicure, single-colour gel and removal of our gel.",chips:[["Lasts 4 weeks","good"],["2-week warranty","good"],["Cat eye / chrome available",""],["No nail art or extensions","no"]]},
+  {id:"biab119",n:"BIAB $119 Special",m:55,c:129,h:119,d:"Lightweight builder gel that strengthens and protects your natural nails. Includes E-file manicure and removal of our gel.",chips:[["Lasts 4 weeks","good"],["2-week warranty","good"],["No extensions","no"]]},
+  {id:"hard",n:"Hard gel manicure",m:55,c:129,h:119,d:"Our signature hard builder gel strengthens and supports your natural nails with a durable finish. Includes E-file manicure, single-colour gel and removal of our gel.",chips:[["Lasts 6–8 weeks","good"],["2-week warranty","good"],["Cat eye / chrome available",""],["Extensions can be added",""]]},
+  {id:"monthly",n:"Hard gel · Monthly design",m:85,range:"$159–$199",cashOff:10,d:"This month's featured designs, at a special price for the current month only. See our Instagram for this month's designs. For a past month's design, book Custom design. Includes hard gel manicure, E-file care and removal of our gel.",chips:[["Lasts 6–8 weeks","good"],["2-week warranty","good"],["Extensions can be added",""]]},
+  {id:"simple",n:"Hard gel · Simple design",m:70,range:"$160–$180",cashOff:10,d:"French tips, ombré, dot art, or nail art on one or two fingers. Includes E-file manicure and removal of our gel.",chips:[["Lasts 6–8 weeks","good"],["2-week warranty","good"],["Extensions can be added",""]]},
+  {id:"custom",n:"Hard gel · Custom design",m:85,range:"$200–$300",cashOff:10,d:"Any nail art, including designs from previous months. Bring an inspiration photo or choose one of our past designs. Includes E-file manicure and removal of our gel.",chips:[["Lasts 6–8 weeks","good"],["2-week warranty","good"],["Extensions can be added",""]]},
+  {id:"biting",n:"Nail Biting Correction Program",m:60,priceText:"1st session $170 <small>· $160 cash</small><br>Sessions 2–4 $110 <small>· $100 cash</small>",c:170,d:"Four full sets of nail extensions with a plain-colour manicure, one every 2 weeks (book in advance). Unlimited free repairs during the program. Removal included from the 2nd session.",chips:[["No further discounts","no"]]},
+  {id:"removal",n:"Removal only, no new set",m:10,priceText:"Gel $40 <small>· $30 cash</small><br>SNS / acrylic $50 <small>· $40 cash</small>",c:40,d:"Removal without a new set.",chips:[],noPhoto:true}
+ ]},
+ {id:"pedi",k:"02",t:"Pedicure",s:"From express polish to full spa",note:"Deluxe pedicures build on Basic Care: soak, heel exfoliation, scrub, cream, cuticle and nail care, and gel polish.",items:[
+  {id:"p11",n:"1+1 Deluxe Pedicure · Premium Care + foot paraffin",m:90,priceText:"$184 for two <small>· cash</small>",c:184,d:"Full Basic Care, deep steam massage, hot stones and hot towels, and foot paraffin. Covers two people, so you only need to book once.",chips:[["Valid until 15 Oct",""],["For two","good"]],noPhoto:true},
+  {id:"pexp",n:"Express pedicure",m:30,c:99,h:89,d:"Nail and cuticle care, gel polish.",chips:[["No spa","no"]]},
+  {id:"pbasic",n:"Deluxe pedicure · Basic Care",m:45,c:109,h:99,d:"Soak, heel exfoliation, scrub, cream, cuticle and nail care, gel polish.",chips:[["No massage","no"]],noPhoto:true},
+  {id:"prelax",n:"Deluxe pedicure · Relax Care",m:60,c:129,h:119,d:"Basic Care plus a quick relaxing massage.",chips:[],noPhoto:true},
+  {id:"pdeep",n:"Deluxe pedicure · Deep Care",m:75,c:149,h:139,d:"Basic Care plus a deep steam massage.",chips:[],noPhoto:true},
+  {id:"pprem",n:"Deluxe pedicure · Premium Care",m:90,c:169,h:159,d:"Basic Care plus deep steam massage, hot stones and hot towels.",chips:[],noPhoto:true}
+ ]},
+ {id:"pkg",k:"03",t:"Mani + Pedi",s:"Packages, and a kids' spa",note:"Packages: one technician does both, one after the other. Single-colour gel only. For nail art or a spa pedicure, book those separately from the individual menu.",items:[
+  {id:"kshellac",n:"Shellac Mani + Pedi",m:65,c:169,h:159,d:"Shellac manicure and pedicure, single colour.",chips:[]},
+  {id:"kbiab",n:"BIAB Mani + Pedi",m:15,c:179,h:169,d:"BIAB manicure and pedicure, single colour.",chips:[],flag:"Duration shows 15 min in Acuity. Please confirm."},
+  {id:"khard",n:"Hard Gel Mani + Pedi",m:85,c:189,h:179,d:"Hard gel manicure and pedicure, single colour.",chips:[]},
+  {id:"kids",n:"Kids Spa + Mani",m:60,priceText:"$149 <small>· $139 cash · was $198</small>",c:149,d:"Safe soft gel for kids (peelable option available) with a fun bath bomb spa.",chips:[["Save $59","good"],["No further discounts","no"]]}
+ ]}
+];
+const TECHS=[
+ {id:"any",n:"Any available",r:"",d:"The first available technician."},
+ {id:"judy",n:"Judy",r:"Senior Technician · 3+ years",d:"Wedding, feminine and cute designs. Great at colour matching and recommending shades that suit you."},
+ {id:"rachel",n:"Rachel",r:"Senior Technician · 3+ years",d:"Y2K, chrome and statement nails. Loves bold, creative designs. Also qualified in foot massage."},
+ {id:"annie",n:"Annie",r:"Master Technician · 9 years",d:"Custom nail designs, creating personalised sets to match your style and inspiration."}
+];
+const ADDONS=[
+ {id:"first",n:"This is my first visit",x:""},
+ {id:"rmOther",n:"Removal: other salon's gel",x:"+$2 per nail · +5 min"},
+ {id:"rmOurs",n:"Removal: our gel",x:"Free · +5 min"},
+ {id:"rmExt",n:"Removal: other salon's extensions, acrylic or SNS",x:"+$3 per nail · +15 min"},
+ {id:"handspa",n:"Hand spa + paraffin treatment",x:"+$25"}
+];
+const STEPS=["Treatment","Technician","Date & time","Details","Payment"];
+const TODAY=new Date(2026,8,28);
+const DEPOSIT=30;
+const st={step:0,cat:null,svc:null,tech:null,addons:{},month:new Date(2026,8,1),date:null,time:null,
+  f:{fn:"",ln:"",ph:"",em:"",sms:false},ok:{dep:false,chk:false,pol:false},paid:false};
+
+const all=CATS.flatMap(c=>c.items.map(i=>({...i,cat:c.id})));
+const $=s=>document.querySelector(s);
+const dur=m=>m<60?`${m} min`:`${Math.floor(m/60)} h${m%60?" "+(m%60)+" min":""}`;
+const price=i=>i.priceText?i.priceText:i.range?`${i.range} <small>· $${i.cashOff} off cash</small>`:`$${i.c} <small>· $${i.h} cash</small>`;
+const fmtDate=d=>d.toLocaleDateString("en-AU",{weekday:"long",day:"numeric",month:"long"});
+const isOpen=d=>d.getDay()!==1 && d>TODAY;
+const isWeekend=d=>d.getDay()===0||d.getDay()===6;
+
+function progress(){
+  $("#progress").innerHTML=STEPS.map((s,i)=>`<li ${i===Math.min(st.step,4)&&!st.paid?'aria-current="step"':""} class="${i<st.step||st.paid?"done":""}">${s}</li>`).join("");
+}
+function summary(){
+  const i=all.find(x=>x.id===st.svc);
+  if(!i){$("#summary").innerHTML=`<h2>Your booking</h2><p class="empty">Choose a treatment to begin. Each booking is for one person and one service.</p>`;return}
+  const t=TECHS.find(x=>x.id===st.tech);
+  const adds=ADDONS.filter(a=>st.addons[a.id]).map(a=>a.n);
+  $("#summary").innerHTML=`<h2>Your booking</h2>
+   <div class="srow"><span>Treatment</span><span style="text-align:end">${i.n}</span></div>
+   <div class="srow"><span>Duration</span><span class="num">${dur(i.m)}</span></div>
+   ${t?`<div class="srow"><span>With</span><span>${t.n}</span></div>`:""}
+   ${adds.length?`<div class="srow"><span>Add-ons</span><span style="text-align:end">${adds.join("<br>")}</span></div>`:""}
+   ${st.date?`<div class="srow"><span>When</span><span style="text-align:end">${fmtDate(st.date)}${st.time?"<br>"+st.time:""}</span></div>`:""}
+   ${st.date&&isWeekend(st.date)?`<div class="srow"><span>Weekend</span><span>+10% on the day</span></div>`:""}
+   <div class="srow total"><span>Deposit today</span><span class="num">$${DEPOSIT}</span></div>
+   <p class="empty" style="font-size:13px">Non-refundable. Taken off your total on the day.</p>`;
+}
+function svcRow(i){
+  return `<div class="svc">
+    <div class="ph" aria-hidden="true">${i.noPhoto?"":"Photo"}</div>
+    <div><h3>${i.n}${i.flag?`<span class="flag" title="${i.flag}">check</span>`:""}</h3>
+      <div class="meta num">${dur(i.m)} · <span class="price">${price(i)}</span></div>
+      <p>${i.d}</p>
+      ${i.chips.length?`<div class="chips">${i.chips.map(([t,k])=>`<span class="chip ${k}">${t}</span>`).join("")}</div>`:""}
+      ${i.flag?`<p class="meta" style="color:var(--warn)">${i.flag}</p>`:""}
+    </div>
+    <button class="choose" data-svc="${i.id}" aria-label="Select ${i.n}">Select</button>
+  </div>`;
+}
+function calendar(){
+  const m=st.month,y=m.getFullYear(),mo=m.getMonth();
+  const first=new Date(y,mo,1).getDay(),days=new Date(y,mo+1,0).getDate();
+  const canPrev=!(y===TODAY.getFullYear()&&mo===TODAY.getMonth());
+  let cells=["S","M","T","W","T","F","S"].map(d=>`<div class="dow" aria-hidden="true">${d}</div>`).join("");
+  for(let i=0;i<first;i++)cells+="<div></div>";
+  for(let d=1;d<=days;d++){
+    const dt=new Date(y,mo,d),open=isOpen(dt),sel=st.date&&+st.date===+dt;
+    cells+=`<button class="day" data-date="${+dt}" ${open?"":"disabled"} aria-pressed="${!!sel}" aria-label="${fmtDate(dt)}${open?"":", closed"}${isWeekend(dt)&&open?", weekend surcharge":""}">${d}${isWeekend(dt)&&open?'<span class="we"></span>':""}</button>`;
+  }
+  return `<div class="cal"><div class="calhead"><button data-month="-1" ${canPrev?"":"disabled"} aria-label="Previous month">‹</button><b>${m.toLocaleDateString("en-AU",{month:"long",year:"numeric"})}</b><button data-month="1" aria-label="Next month">›</button></div>
+  <div class="grid7">${cells}</div>
+  <div class="legend"><span><i></i>Sat/Sun: 10% surcharge (members exempt)</span><span>Closed Mondays</span><span>Melbourne time</span></div></div>`;
+}
+function slots(){
+  const base=["11:45 AM","2:30 PM","3:30 PM","3:35 PM","3:50 PM","3:55 PM","4:00 PM","4:05 PM","4:10 PM","4:15 PM","4:20 PM","4:25 PM","4:30 PM","4:55 PM","5:00 PM","5:05 PM","5:10 PM","5:15 PM"];
+  return `<div class="slots" role="group" aria-label="Available times">${base.map(t=>`<button class="slot" data-time="${t}" aria-pressed="${st.time===t}">${t}</button>`).join("")}</div>
+  <p class="meta" style="margin-top:8px">Example times. The real site shows live availability from Acuity.</p>`;
+}
+function policy(id,title,sub,body){
+  return `<details ${id==="menu"?"open":""}><summary>${title}<small>${sub}</small></summary><div class="pbody">${body}</div></details>`;
+}
+function view(){
+  const i=all.find(x=>x.id===st.svc);
+  if(st.paid){
+    const t=TECHS.find(x=>x.id===st.tech);
+    return `<div class="done"><div class="ring">✓</div><h1>You're booked</h1>
+      <p class="lede">${i.n} with ${t.n} · ${fmtDate(st.date)} at ${st.time}</p>
+      <p class="lede">Level 1, 179 Little Bourke St. Please arrive 10 minutes early to choose your colour. A confirmation is on its way by SMS and email.</p>
+      <button class="choose ghost" data-reset>Start a new booking</button></div>`;
+  }
+  if(st.step===0&&!st.cat){
+    return `<h1>Book an appointment</h1>
+     <p class="lede">Choose a category to see treatments, prices and what's included.</p>
+     <div class="cats">${CATS.map(c=>`<button class="cat" data-cat="${c.id}"><span class="k">${c.k}</span><span class="t">${c.t}</span><span class="s">${c.s}</span></button>`).join("")}</div>
+     <div class="note"><b>Booking for more than one person or service?</b>
+       <p>Each booking covers one person and one service. Book each one separately, for example BIAB with Sue at 9:00 and BIAB with Ashley at 9:00. For the same technician, book back-to-back times, such as 9:00 and 10:00, subject to availability.</p>
+       <p>Select any add-ons you need, like extensions or removal, in each booking.</p></div>
+     <div class="links"><a href="#vouchers">E-gift vouchers</a><a href="#balance">Check code balance</a></div>`;
+  }
+  if(st.step===0){
+    const c=CATS.find(x=>x.id===st.cat);
+    return `<button class="back" data-back>‹ All categories</button><h1>${c.t}</h1>
+     ${c.note?`<div class="groupnote">${c.note}</div>`:""}
+     ${c.items.map(svcRow).join("")}`;
+  }
+  if(st.step===1){
+    return `<button class="back" data-go="0">‹ Change treatment</button><h1>Choose your technician</h1>
+     <div class="techs">${TECHS.map(t=>`<button class="tech" data-tech="${t.id}" aria-pressed="${st.tech===t.id}"><span class="n">${t.n}</span><span class="r">${t.r}</span><span class="d">${t.d}</span></button>`).join("")}</div>`;
+  }
+  if(st.step===2){
+    return `<button class="back" data-go="1">‹ Change technician</button><h1>Add-ons, date and time</h1>
+     <div class="sectionlabel">Add to your appointment</div>
+     <p class="meta" style="margin:0">Add-ons can't be added on the day, so choose them now.</p>
+     <div class="checks">${ADDONS.map(a=>`<label class="check" for="a-${a.id}"><input type="checkbox" id="a-${a.id}" data-addon="${a.id}" ${st.addons[a.id]?"checked":""}><span>${a.n}${a.x?`<br><span class="x">${a.x}</span>`:""}</span></label>`).join("")}</div>
+     <div class="sectionlabel">Date</div>${calendar()}
+     ${st.date?`<div class="sectionlabel">Time · ${fmtDate(st.date)}</div>${slots()}`:""}
+     <button class="cta" data-go="3" ${st.time?"":"disabled"}>Continue</button>`;
+  }
+  if(st.step===3){
+    const f=st.f,ok=st.ok;
+    const ready=f.fn&&f.ln&&f.ph&&f.em&&f.sms&&ok.dep&&ok.chk&&ok.pol;
+    return `<button class="back" data-go="2">‹ Change date or time</button><h1>Your details</h1>
+     <div class="form">
+      <label class="field" for="fn">First name<input id="fn" autocomplete="given-name" value="${f.fn}"></label>
+      <label class="field" for="ln">Last name<input id="ln" autocomplete="family-name" value="${f.ln}"></label>
+      <p class="korean full" lang="ko" style="grid-column:1/-1;margin:-6px 0 0">한국분들은 한글로 예약해 주세요. 예) 김태희 또는 제시카 김</p>
+      <label class="field" for="ph">Mobile<div class="phone"><span>+61</span><input id="ph" type="tel" inputmode="tel" autocomplete="tel-national" value="${f.ph}" placeholder="4xx xxx xxx"></div></label>
+      <label class="field" for="em">Email<input id="em" type="email" autocomplete="email" value="${f.em}"><span class="hint">Add more addresses with a comma.</span></label>
+      <label class="check full" for="sms" style="grid-column:1/-1"><input type="checkbox" id="sms" ${f.sms?"checked":""}><span>I accept the <a href="#terms">Terms of Service</a>, have read the <a href="#privacy">Privacy Policy</a>, and agree to receive SMS about my appointments and waitlist availability.</span></label>
+     </div>
+     <div class="sectionlabel">Before you pay</div>
+     <div class="policies">
+      ${policy("dep","Deposit","$30, non-refundable",`<p>A $30 non-refundable deposit secures your booking and is taken off your total. A 2% card surcharge applies. Gift vouchers can't be used for the deposit.</p>`)}
+      ${policy("menu","Book the right service","Add-ons can't be added on the day",`<p>If you need nail art, removal, extensions or any other add-on, select it now. We can't add it on the day. For example, a plain service booked without nail art can't have nail art added at your appointment.</p>`)}
+      ${policy("cancel","Cancellation & rescheduling","24 hours' notice",`<ol><li>Cancel or reschedule free up to 24 hours before your appointment. Your deposit becomes credit for your next booking.</li><li>Within 24 hours, the deposit is non-refundable.</li><li>Rescheduling within 24 hours costs $20.</li></ol>`)}
+      ${policy("late","Late arrivals","10 minutes",`<ol><li>Please arrive 10 minutes early to choose your colour and design.</li><li>If you're late, we may need to shorten your service to fit the remaining time (for example, design manicure to plain).</li><li>At 10 minutes late, the appointment is cancelled automatically and the deposit is non-refundable.</li></ol>`)}
+      ${policy("refund","Refunds & allergies","No refunds after service",`<p>No refunds once a service is complete. By going ahead with your service, you agree to this. We're not responsible for individual allergic or sensitivity reactions to products, including related medical costs.</p>`)}
+      ${policy("disc","Discounts & weekend surcharge","One discount per visit",`<ul><li>10% off: come with a friend</li><li>10% off: book two services</li><li>15% off: your birthday month</li></ul><p>One discount per visit. Not combinable with monthly specials or packages. A 10% surcharge applies on Saturday and Sunday (members exempt).</p>`)}
+     </div>
+     <div class="checks" style="margin-top:14px">
+      <label class="check" for="okdep"><input type="checkbox" id="okdep" data-ok="dep" ${ok.dep?"checked":""}><span>I understand my $30 deposit is non-refundable.</span></label>
+      <label class="check" for="okchk"><input type="checkbox" id="okchk" data-ok="chk" ${ok.chk?"checked":""}><span>I've double-checked my service and add-ons.</span></label>
+      <label class="check" for="okpol"><input type="checkbox" id="okpol" data-ok="pol" ${ok.pol?"checked":""}><span>I agree to the cancellation, late arrival and refund policies.</span></label>
+     </div>
+     <button class="cta" data-go="4" ${ready?"":"disabled"}>Continue to payment</button>
+     ${ready?"":`<p class="why">Fill in all fields and tick the four boxes to continue.</p>`}`;
+  }
+  return `<button class="back" data-go="3">‹ Back to details</button><h1>Pay your deposit</h1>
+   <p class="lede">$30 today to secure ${fmtDate(st.date)} at ${st.time}. The rest is paid in the salon.</p>
+   <div class="paybox">
+    <button class="applepay" data-pay aria-label="Pay $30 with Apple Pay"><svg viewBox="0 0 170 200" aria-hidden="true"><path d="M150 67c-1 1-19 11-19 33 0 26 23 35 23 35s-4 13-12 25c-7 11-15 21-27 21s-15-7-29-7c-13 0-18 7-29 7s-19-10-27-22C19 144 11 124 11 104c0-31 20-48 40-48 11 0 20 7 27 7 6 0 17-8 29-8 5 0 21 0 33 12zM109 39c5-6 9-15 9-24 0-1 0-2-1-3-8 0-18 5-24 12-5 6-10 15-10 24v3h3c7 0 17-5 23-12z"/></svg>Pay</button>
+    <button class="gpay" data-pay aria-label="Pay $30 with Google Pay">G Pay</button>
+    <div class="or">or pay by card</div>
+    <div class="cardfield" aria-label="Card details (example)"><div>Card number</div><div><span>MM / YY</span><span>CVV</span></div></div>
+    <button class="cta" data-pay style="margin-top:0">Pay $30 by card</button>
+    <p class="secure">Secure payment. The salon never sees or stores your card number. Visa, Mastercard, Amex.</p>
+   </div>`;
+}
+function render(focus){
+  progress();summary();$("#main").innerHTML=view();
+  if(focus){const h=$("#main h1");if(h){h.setAttribute("tabindex","-1");h.focus()}}
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest("button,a");if(!b)return;
+  const d=b.dataset;
+  if(b.tagName==="A"&&b.getAttribute("href")?.startsWith("#")){e.preventDefault();return}
+  if(d.cat){st.cat=d.cat;render(true)}
+  else if("back" in d){st.cat=null;render(true)}
+  else if(d.svc){st.svc=d.svc;st.step=1;render(true)}
+  else if(d.tech){st.tech=d.tech;st.step=2;render(true)}
+  else if(d.month){const m=st.month;st.month=new Date(m.getFullYear(),m.getMonth()+ +d.month,1);render();$(`[data-month="${d.month}"]`)?.focus()}
+  else if(d.date){st.date=new Date(+d.date);st.time=null;render();$(`[data-date="${d.date}"]`)?.focus()}
+  else if(d.time){st.time=d.time;render();$(`[data-time="${d.time}"]`)?.focus()}
+  else if(d.go){st.step=+d.go;render(true)}
+  else if("pay" in d){st.paid=true;render(true)}
+  else if("reset" in d){Object.assign(st,{step:0,cat:null,svc:null,tech:null,addons:{},date:null,time:null,f:{fn:"",ln:"",ph:"",em:"",sms:false},ok:{dep:false,chk:false,pol:false},paid:false});render(true)}
+});
+document.addEventListener("change",e=>{
+  const t=e.target;
+  if(t.dataset.addon){st.addons[t.dataset.addon]=t.checked;summary()}
+  else if(t.dataset.ok){st.ok[t.dataset.ok]=t.checked;keep(t.id)}
+  else if(t.id==="sms"){st.f.sms=t.checked;keep("sms")}
+});
+document.addEventListener("input",e=>{
+  const t=e.target;if(!["fn","ln","ph","em"].includes(t.id))return;
+  st.f[t.id]=t.value.trim();
+  const f=st.f,ok=st.ok,btn=$('[data-go="4"]');
+  if(btn)btn.disabled=!(f.fn&&f.ln&&f.ph&&f.em&&f.sms&&ok.dep&&ok.chk&&ok.pol);
+});
+function keep(id){render();document.getElementById(id)?.focus()}
+render();
+</script>

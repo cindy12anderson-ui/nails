@@ -1,0 +1,216 @@
+<title>Nails&amp;Gel Style Options</title>
+<meta name="description" content="Three design directions for the Nails&amp;Gel booking site, for approval.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Italiana&family=Figtree:wght@300;400;500;600&family=Marcellus&family=Karla:wght@300;400;500;600&family=Hanken+Grotesk:wght@200;300;400;500;600&display=swap">
+<style>
+:root{
+  --bg:#F4F0EE; --surface:#FCFAF9; --ink:#2A2322; --muted:#685D5A;
+  --line:#E2D7D2; --accent:#7E5E52; --accent-soft:#EFE4DF; --chip:#E9DCD6;
+  --pay-bg:#000; --pay-fg:#fff;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#141111; --surface:#1D1918; --ink:#F2EBE8; --muted:#B3A7A3;
+    --line:#382F2D; --accent:#D6B4A5; --accent-soft:#33282A; --chip:#2B2322;
+    --pay-bg:#fff; --pay-fg:#000;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#141111; --surface:#1D1918; --ink:#F2EBE8; --muted:#B3A7A3;
+  --line:#382F2D; --accent:#D6B4A5; --accent-soft:#33282A; --chip:#2B2322;
+  --pay-bg:#fff; --pay-fg:#000;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:"Figtree",Arial,sans-serif;font-size:16px;line-height:1.6;padding-inline:16px;padding-block:20px 56px}
+.shell{max-width:1040px;margin-inline:auto;display:grid;gap:20px}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* Chooser */
+.chooser{display:grid;gap:12px}
+.chooser .top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 16px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.chooser .top b{font-weight:600;font-size:15px;letter-spacing:.02em}
+.chooser .top span{color:var(--muted);font-size:14px}
+.tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:640px){.tabs{grid-template-columns:1fr}}
+.tab{display:grid;gap:2px;text-align:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:transparent;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--ink);background:var(--surface)}
+.tab .k{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.tab .t{font-weight:600}
+.tab .f{font-size:13px;color:var(--muted)}
+
+.stage{background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.flag{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);border-radius:99px;padding:0 7px;color:var(--muted);margin-inline-start:6px;vertical-align:middle;font-weight:500}
+.policy-ph{border:1px dashed var(--line);border-radius:10px;padding:10px 12px;color:var(--muted);font-size:14px}
+.agree{display:flex;gap:10px;align-items:flex-start;font-size:14px}
+.agree input{width:18px;height:18px;margin-top:2px;accent-color:var(--ink)}
+.applepay{height:50px;border:0;border-radius:var(--pay-r,10px);background:var(--pay-bg);color:var(--pay-fg);font:600 19px/1 -apple-system,"SF Pro Text","Helvetica Neue",Arial,sans-serif;display:flex;align-items:center;justify-content:center;gap:5px;cursor:pointer;width:100%}
+.applepay svg{width:17px;height:21px;fill:currentColor;margin-top:-3px}
+.applepay:disabled,.cardpay:disabled{opacity:.35;cursor:not-allowed}
+.cardpay{height:50px;border:1px solid var(--line);border-radius:var(--pay-r,10px);background:transparent;cursor:pointer;width:100%;font-weight:500}
+.paynote{font-size:13px;color:var(--muted);text-align:center}
+.num{font-variant-numeric:tabular-nums}
+
+/* ---------- A · Gallery ---------- */
+.A{font-family:"Figtree",Arial,sans-serif;padding:48px 24px 56px}
+.A .inner{max-width:620px;margin-inline:auto;display:grid;gap:40px}
+.A header{text-align:center;display:grid;gap:10px}
+.A .logo{font-family:"Italiana","Didot",serif;font-size:clamp(44px,9vw,68px);line-height:1;letter-spacing:.02em}
+.A .logo span{color:var(--accent)}
+.A .tag{font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:var(--muted)}
+.A .meta{font-size:14px;color:var(--muted)}
+.A nav{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 22px;border-block:1px solid var(--line);padding-block:12px}
+.A nav a{color:var(--ink);text-decoration:none;font-size:13px;letter-spacing:.18em;text-transform:uppercase}
+.A nav a:hover{color:var(--accent)}
+.A h2{font-family:"Italiana",serif;font-weight:400;font-size:30px;text-align:center;margin:0 0 14px}
+.A .row{display:grid;grid-template-columns:auto 1fr auto;align-items:baseline;gap:10px;padding-block:14px;border-bottom:1px solid var(--line);cursor:pointer;background:none;border-inline:0;border-top:0;text-align:start;width:100%}
+.A .row .dots{border-bottom:1px dotted var(--muted);transform:translateY(-4px);opacity:.6}
+.A .row .n{font-size:17px}
+.A .row .d{grid-column:1/-1;color:var(--muted);font-size:14px;margin-top:-6px}
+.A .row[aria-pressed="true"] .n{color:var(--accent)}
+.A .book{display:grid;gap:14px;background:var(--bg);padding:24px;border-radius:2px}
+.A .book h3{font-family:"Italiana",serif;font-weight:400;font-size:24px;margin:0;text-align:center}
+.A .sum{display:flex;justify-content:space-between;font-size:15px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.A{--pay-r:2px}
+
+/* ---------- B · Maison ---------- */
+.B{font-family:"Karla",Arial,sans-serif;padding:28px 20px 40px;background:var(--bg)}
+.B .card{max-width:900px;margin-inline:auto;background:var(--surface);border:1px solid var(--line);outline:1px solid var(--line);outline-offset:-8px;padding:44px clamp(20px,5vw,56px)}
+.B header{display:grid;grid-template-columns:1fr auto;gap:8px 24px;align-items:end;border-bottom:1px solid var(--ink);padding-bottom:18px}
+@media (max-width:640px){.B header{grid-template-columns:1fr}}
+.B .logo{font-family:"Marcellus","Trajan Pro",serif;font-size:clamp(34px,6vw,48px);letter-spacing:.14em;text-transform:uppercase;line-height:1.05}
+.B .tag{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.B .meta{font-size:14px;color:var(--muted);text-align:end}
+@media (max-width:640px){.B .meta{text-align:start}}
+.B .cols{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:40px;margin-top:32px}
+@media (max-width:760px){.B .cols{grid-template-columns:1fr}}
+.B h2{font-family:"Marcellus",serif;font-weight:400;font-size:15px;letter-spacing:.24em;text-transform:uppercase;margin:24px 0 6px;color:var(--accent)}
+.B h2:first-child{margin-top:0}
+.B .row{display:grid;grid-template-columns:1fr auto;gap:0 12px;width:100%;text-align:start;background:none;border:0;border-bottom:1px solid var(--line);padding:12px 0;cursor:pointer}
+.B .row .n{font-weight:500}
+.B .row .d{color:var(--muted);font-size:14px;grid-column:1/-1}
+.B .row[aria-pressed="true"]{background:var(--accent-soft);padding-inline:10px}
+.B .book{border:1px solid var(--line);padding:22px;display:grid;gap:14px;align-content:start;position:sticky;top:16px}
+.B .book h3{font-family:"Marcellus",serif;font-weight:400;font-size:20px;letter-spacing:.06em;margin:0}
+.B .sum{display:grid;gap:4px;font-size:15px}
+.B .sum div{display:flex;justify-content:space-between;gap:10px}
+.B .sum .dep{border-top:1px solid var(--line);padding-top:8px;font-weight:600}
+.B{--pay-r:0}
+
+/* ---------- C · Seoul ---------- */
+.C{font-family:"Hanken Grotesk",Arial,sans-serif;padding:28px 20px 44px}
+.C .inner{max-width:900px;margin-inline:auto;display:grid;gap:28px}
+.C header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px}
+.C .logo{font-weight:300;font-size:26px;letter-spacing:-.01em}
+.C .logo b{font-weight:600}
+.C .pill{border:1px solid var(--line);border-radius:99px;padding:6px 14px;font-size:13px;color:var(--muted)}
+.C .hero{display:grid;gap:10px}
+.C .hero h1{font-weight:200;font-size:clamp(34px,7vw,58px);line-height:1.04;letter-spacing:-.03em;margin:0;text-wrap:balance}
+.C .hero p{margin:0;color:var(--muted);max-width:46ch}
+.C .swatches{display:flex;gap:8px}
+.C .swatches i{width:28px;height:28px;border-radius:50%;display:block}
+.C .chips{display:flex;flex-wrap:wrap;gap:8px}
+.C .chips button{border:1px solid var(--line);border-radius:99px;padding:8px 16px;background:transparent;cursor:pointer;font-size:14px}
+.C .chips button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.C .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.C .tile{display:grid;gap:6px;text-align:start;padding:18px;border-radius:22px;background:var(--bg);border:1px solid transparent;cursor:pointer}
+.C .tile[aria-pressed="true"]{border-color:var(--ink)}
+.C .tile .n{font-weight:500;font-size:17px}
+.C .tile .d{color:var(--muted);font-size:14px}
+.C .tile .p{font-weight:500}
+.C .book{border-radius:26px;background:var(--bg);padding:22px;display:grid;gap:14px;max-width:480px}
+.C .book h3{font-weight:300;font-size:26px;letter-spacing:-.02em;margin:0}
+.C .sum{display:flex;justify-content:space-between;gap:10px;font-size:15px}
+.C{--pay-r:99px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="shell">
+  <div class="chooser">
+    <div class="top"><b>Nails&amp;Gel · three directions, same colours</b><span>Content is a stand-in until the full Acuity text is copied over. Pick one to take forward.</span></div>
+    <div class="tabs" role="tablist" aria-label="Design option">
+      <button class="tab" role="tab" id="t-A" aria-controls="opt" data-opt="A"><span class="k">Option A</span><span class="t">Gallery</span><span class="f">Italiana + Figtree · airy, one column, price list</span></button>
+      <button class="tab" role="tab" id="t-B" aria-controls="opt" data-opt="B"><span class="k">Option B</span><span class="t">Maison</span><span class="f">Marcellus + Karla · framed spa menu card</span></button>
+      <button class="tab" role="tab" id="t-C" aria-controls="opt" data-opt="C"><span class="k">Option C</span><span class="t">Seoul Modern</span><span class="f">Hanken Grotesk · soft tiles, Korean minimal</span></button>
+    </div>
+  </div>
+  <div class="stage" id="opt" role="tabpanel"></div>
+</div>
+
+<script>
+const menu=[
+  {cat:"Hard Gel",items:[
+    {id:"hg",n:"Hard gel manicure",d:"Korean hard gel overlay",m:90,p:120,s:true},
+    {id:"ext",n:"Hard gel extensions",d:"Sculpted length and shape",m:120,p:160,s:true},
+    {id:"inf",n:"Hard gel infill",d:"Rebalance and refresh",m:90,p:110,s:true}]},
+  {cat:"Spa Pedicure",items:[
+    {id:"lux",n:"Luxury spa pedicure",d:"Aromatic foot soak, callus and cuticle care, hot stone massage, steam mask pack, exfoliating scrub, gel polish and a drink of your choice",m:90,p:179}]},
+  {cat:"Lashes",items:[
+    {id:"lash",n:"Lash lift",d:"Lift and tint",m:60,p:95,s:true}]}
+];
+const all=menu.flatMap(c=>c.items);
+const INFO={addr:"Level 1, 179 Little Bourke St, Melbourne VIC 3000",hours:"Tuesday to Sunday · 9am to 7pm",deposit:30};
+const st={opt:"A",svc:"lux",cat:"Spa Pedicure",agree:false};
+const apple=`<svg viewBox="0 0 170 200" aria-hidden="true"><path d="M150 67c-1 1-19 11-19 33 0 26 23 35 23 35s-4 13-12 25c-7 11-15 21-27 21s-15-7-29-7c-13 0-18 7-29 7s-19-10-27-22C19 144 11 124 11 104c0-31 20-48 40-48 11 0 20 7 27 7 6 0 17-8 29-8 5 0 21 0 33 12zM109 39c5-6 9-15 9-24 0-1 0-2-1-3-8 0-18 5-24 12-5 6-10 15-10 24v3h3c7 0 17-5 23-12z"/></svg>Pay`;
+const flag=x=>x.s?`<span class="flag">sample</span>`:"";
+
+function pay(){
+  const dis=st.agree?"":"disabled";
+  return `<div class="policy-ph">Cancellation policy from Acuity goes here, word for word, every clause.</div>
+  <label class="agree" for="agree"><input type="checkbox" id="agree" ${st.agree?"checked":""}> I have read and agree to the cancellation policy</label>
+  <button class="applepay" ${dis} aria-label="Pay $${INFO.deposit} deposit with Apple Pay">${apple}</button>
+  <button class="cardpay" ${dis}>Pay by card</button>
+  <div class="paynote">$${INFO.deposit} AUD deposit, taken off your final bill</div>`;
+}
+function A(){
+  const x=all.find(i=>i.id===st.svc);
+  return `<div class="A"><div class="inner">
+    <header><div class="logo">Nails<span>&amp;</span>Gel</div><div class="tag">Luxury nail bar and spa</div><div class="meta">Hard gel specialists · Korean nail salon · Melbourne CBD</div></header>
+    <nav aria-label="Menu sections">${menu.map(c=>`<a href="#${c.cat.replace(/\W/g,"")}">${c.cat}</a>`).join("")}</nav>
+    ${menu.map(c=>`<section id="${c.cat.replace(/\W/g,"")}"><h2>${c.cat}</h2>${c.items.map(i=>`<button class="row" data-svc="${i.id}" aria-pressed="${st.svc===i.id}"><span class="n">${i.n}${flag(i)}</span><span class="dots"></span><span class="num">$${i.p}</span><span class="d">${i.m} min · ${i.d}</span></button>`).join("")}</section>`).join("")}
+    <div class="book"><h3>Reserve your appointment</h3><div class="sum"><span>${x.n}</span><span class="num">$${x.p} · ${x.m} min</span></div>${pay()}</div>
+    <div class="meta" style="text-align:center">${INFO.addr}<br>${INFO.hours}</div>
+  </div></div>`;
+}
+function B(){
+  const x=all.find(i=>i.id===st.svc);
+  return `<div class="B"><div class="card">
+    <header><div><div class="logo">Nails&amp;Gel</div><div class="tag">Luxury nail bar &amp; spa</div></div><div class="meta">${INFO.addr}<br>${INFO.hours}</div></header>
+    <div class="cols"><div>${menu.map(c=>`<h2>${c.cat}</h2>${c.items.map(i=>`<button class="row" data-svc="${i.id}" aria-pressed="${st.svc===i.id}"><span class="n">${i.n}${flag(i)}</span><span class="num">$${i.p}</span><span class="d">${i.m} min · ${i.d}</span></button>`).join("")}`).join("")}</div>
+    <aside class="book"><h3>Your booking</h3><div class="sum"><div><span>${x.n}</span><span class="num">$${x.p}</span></div><div><span>Duration</span><span class="num">${x.m} min</span></div><div class="dep"><span>Deposit today</span><span class="num">$${INFO.deposit}</span></div></div>${pay()}</aside></div>
+  </div></div>`;
+}
+function C(){
+  const x=all.find(i=>i.id===st.svc);
+  const cur=menu.find(c=>c.cat===st.cat);
+  return `<div class="C"><div class="inner">
+    <header><div class="logo">Nails<b>&amp;</b>Gel</div><span class="pill">Melbourne CBD · Tue to Sun</span></header>
+    <div class="hero"><h1>Korean hard gel, done beautifully.</h1><p>Luxury nail bar and spa on Little Bourke Street.</p><div class="swatches" aria-hidden="true"><i style="background:#EAD7CF"></i><i style="background:#D9B8AA"></i><i style="background:#B98C7D"></i><i style="background:#7E5E52"></i></div></div>
+    <div class="chips" role="group" aria-label="Category">${menu.map(c=>`<button data-cat="${c.cat}" aria-pressed="${st.cat===c.cat}">${c.cat}</button>`).join("")}</div>
+    <div class="grid">${cur.items.map(i=>`<button class="tile" data-svc="${i.id}" aria-pressed="${st.svc===i.id}"><span class="n">${i.n}${flag(i)}</span><span class="d">${i.m} min · ${i.d}</span><span class="p num">$${i.p}</span></button>`).join("")}</div>
+    <div class="book"><h3>Book ${x.n.toLowerCase()}</h3><div class="sum"><span>${x.m} min · $${x.p}</span><span class="num">Deposit $${INFO.deposit}</span></div>${pay()}</div>
+    <p style="color:var(--muted);font-size:14px;margin:0">${INFO.addr}</p>
+  </div></div>`;
+}
+const R={A,B,C};
+const stage=document.getElementById("opt");
+function render(){
+  document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected",t.dataset.opt===st.opt));
+  stage.setAttribute("aria-labelledby","t-"+st.opt);
+  stage.innerHTML=R[st.opt]();
+}
+document.querySelector(".tabs").addEventListener("click",e=>{const t=e.target.closest(".tab");if(!t)return;st.opt=t.dataset.opt;render()});
+stage.addEventListener("click",e=>{
+  const b=e.target.closest("[data-svc],[data-cat]");if(!b)return;
+  if(b.dataset.cat){st.cat=b.dataset.cat;st.svc=menu.find(c=>c.cat===st.cat).items[0].id}
+  else st.svc=b.dataset.svc;
+  const sel=b.dataset.cat?`[data-cat="${st.cat}"]`:`[data-svc="${st.svc}"]`;
+  render();stage.querySelector(sel)?.focus();
+});
+stage.addEventListener("change",e=>{if(e.target.id==="agree"){st.agree=e.target.checked;render();document.getElementById("agree").focus()}});
+const h=(location.hash||"").slice(1).toUpperCase();if(R[h])st.opt=h;
+render();
+</script>

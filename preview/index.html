@@ -1,0 +1,225 @@
+<title>Nail&amp;Gel Booking</title>
+<meta name="description" content="Draft for approval: a luxury booking flow with Apple Pay for Nail&amp;Gel, Melbourne CBD.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500;600&display=swap">
+<style>
+:root{
+  --bg:#F4F0EE; --surface:#FCFAF9; --ink:#2A2322; --muted:#7A6E6B;
+  --line:#E4DAD6; --accent:#8C6A5D; --accent-soft:#EFE4DF; --focus:#8C6A5D;
+  --display:"Bodoni Moda","Didot","Times New Roman",serif;
+  --body:"Jost","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#141111; --surface:#1D1918; --ink:#F2EBE8; --muted:#A99D99;
+    --line:#352D2B; --accent:#D1AE9F; --accent-soft:#33282A; --focus:#D1AE9F;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#141111; --surface:#1D1918; --ink:#F2EBE8; --muted:#A99D99;
+  --line:#352D2B; --accent:#D1AE9F; --accent-soft:#33282A; --focus:#D1AE9F;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-weight:400;font-size:16px;line-height:1.6;padding-inline:16px;padding-block:24px 48px}
+.wrap{max-width:1080px;margin-inline:auto;display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:56px;align-items:start}
+@media (max-width:860px){.wrap{grid-template-columns:1fr;gap:32px}}
+.draft{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:12px}
+.draft b{font-family:var(--display);font-weight:500;font-size:20px}
+.draft span{color:var(--muted);font-size:14px}
+
+.app{background:var(--surface);border:1px solid var(--line);border-radius:28px;overflow:hidden;box-shadow:0 30px 60px -40px rgba(42,35,34,.45)}
+.brand{padding:30px 24px 22px;text-align:center;border-bottom:1px solid var(--line)}
+.logo{font-family:var(--display);font-size:34px;line-height:1;letter-spacing:.01em}
+.logo i{font-style:italic;color:var(--accent);padding-inline:1px}
+.sub{margin-top:8px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+.steps{display:flex;gap:6px;padding:16px 24px 0;list-style:none;margin:0}
+.steps li{flex:1;height:2px;background:var(--line)}
+.steps li.on{background:var(--accent)}
+.stepname{padding:10px 24px 0;font-size:12px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+.panel{padding:14px 24px 26px;display:grid;gap:12px}
+h2{font-family:var(--display);font-weight:400;font-size:26px;line-height:1.2;margin:0}
+.cat{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-top:8px}
+.svc{display:grid;grid-template-columns:1fr auto;gap:2px 12px;text-align:start;width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:transparent;color:inherit;font:inherit;cursor:pointer;transition:border-color .2s,background .2s}
+.svc:hover{border-color:var(--accent)}
+.svc[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.svc .n{font-weight:500}
+.svc .p{font-variant-numeric:tabular-nums;font-weight:500}
+.svc .d{color:var(--muted);font-size:14px;grid-column:1/-1}
+.svc .d em{font-style:normal;font-size:11px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);border-radius:99px;padding:0 6px;margin-inline-start:6px}
+.days{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.day,.slot{border:1px solid var(--line);border-radius:12px;background:transparent;color:inherit;font:inherit;cursor:pointer;padding:10px 4px;text-align:center;font-variant-numeric:tabular-nums}
+.day small{display:block;color:var(--muted);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.day[aria-pressed="true"],.slot[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.day[aria-pressed="true"] small{color:inherit;opacity:.75}
+.slots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.slot:disabled{opacity:.35;text-decoration:line-through;cursor:not-allowed}
+label{font-size:14px;font-weight:500;display:grid;gap:6px}
+input{font:inherit;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink)}
+input:focus-visible,button:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.summary{background:var(--bg);border-radius:14px;padding:14px 16px;display:grid;gap:4px;font-size:15px}
+.summary div{display:flex;justify-content:space-between;gap:12px}
+.summary .tot{border-top:1px solid var(--line);margin-top:6px;padding-top:8px;font-weight:600}
+.num{font-variant-numeric:tabular-nums}
+.primary{font:inherit;font-weight:500;letter-spacing:.06em;font-size:16px;padding:14px;border-radius:14px;border:1px solid var(--ink);background:var(--ink);color:var(--surface);cursor:pointer}
+.primary.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.primary:disabled{opacity:.35;cursor:not-allowed}
+.link{font:inherit;background:none;border:0;color:var(--muted);cursor:pointer;text-decoration:underline;padding:4px;justify-self:center}
+.applepay{font:600 19px/1 -apple-system,"SF Pro Text","Helvetica Neue",Arial,sans-serif;height:52px;border-radius:14px;border:0;background:#000;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px}
+:root[data-theme="dark"] .applepay{background:#fff;color:#000}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .applepay{background:#fff;color:#000}}
+.applepay svg{width:17px;height:21px;fill:currentColor;margin-top:-3px}
+.or{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
+.secure{text-align:center;color:var(--muted);font-size:13px}
+.done{text-align:center;padding-block:12px}
+.done .ring{width:64px;height:64px;border-radius:50%;border:1px solid var(--accent);display:grid;place-items:center;margin:0 auto 14px;color:var(--accent);font-size:26px}
+.done p{color:var(--muted);margin:8px 0 0}
+
+.notes h2{font-size:32px;margin-bottom:8px;text-wrap:balance}
+.notes > p{color:var(--muted);max-width:60ch;margin-top:0}
+.notes section{border-top:1px solid var(--line);padding-block:18px;display:grid;gap:6px}
+.notes h3{font-family:var(--display);font-weight:500;font-size:20px;margin:0}
+.notes ul{margin:0;padding-inline-start:20px;max-width:62ch}
+.notes li{margin-block:3px}
+.tag{display:inline-block;font-family:var(--body);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent);font-weight:600;margin-inline-start:6px;vertical-align:middle}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap" lang="en">
+  <div class="draft"><b>Draft for approval · v0.2</b><span>Demo only. Items marked "sample" need real prices from the salon.</span></div>
+
+  <main class="app" aria-label="Booking demo">
+    <header class="brand">
+      <div class="logo">Nail<i>&amp;</i>Gel</div>
+      <div class="sub">Luxury nail bar &amp; spa · Melbourne CBD</div>
+    </header>
+    <ol class="steps" aria-hidden="true"><li></li><li></li><li></li><li></li></ol>
+    <div class="stepname" id="stepname"></div>
+    <div class="panel" id="panel"></div>
+  </main>
+
+  <aside class="notes">
+    <h2>What you're looking at</h2>
+    <p>A proposed design direction and booking flow. Once the direction is approved, we swap in the salon's real menu, photos and logo.</p>
+    <section>
+      <h3>Quiet luxury</h3>
+      <ul>
+        <li>Milk-porcelain, espresso ink and a soft rose-nude accent, the colours of a finished hard gel set.</li>
+        <li>Bodoni Moda for headings, Jost for text. Editorial and calm, with plenty of air.</li>
+        <li>Automatic dark mode that follows the client's phone.</li>
+      </ul>
+    </section>
+    <section>
+      <h3>Simple and accessible <span class="tag">WCAG 2.2 AA</span></h3>
+      <ul>
+        <li>One decision per screen, large thumb-sized buttons, full keyboard support.</li>
+        <li>Compliant contrast and screen-reader labels, in line with the Australian DDA.</li>
+      </ul>
+    </section>
+    <section>
+      <h3>Apple Pay in one tap <span class="tag">Stripe or Square · AUD</span></h3>
+      <ul>
+        <li>Apple Pay shows first on iPhone, Google Pay on Android, and card as a fallback.</li>
+        <li>Card details never touch our code. The payment provider handles them (PCI DSS).</li>
+      </ul>
+    </section>
+    <section>
+      <h3>Speed and security</h3>
+      <ul>
+        <li>Target: under one second to load on 4G, Lighthouse score 95+.</li>
+        <li>HTTPS, security headers, and no secret keys in the code.</li>
+      </ul>
+    </section>
+    <section>
+      <h3>Salon details used</h3>
+      <ul>
+        <li>Level 1, 179 Little Bourke Street, Melbourne VIC 3000</li>
+        <li>Tuesday to Sunday, 9am to 7pm</li>
+      </ul>
+    </section>
+  </aside>
+</div>
+
+<script>
+const services=[
+  {cat:"Hard gel manicure",items:[
+    {id:"hg",n:"Signature hard gel",d:"90 min · Korean hard gel overlay",p:120,sample:true},
+    {id:"ext",n:"Hard gel extensions",d:"120 min · shape and length of your choice",p:160,sample:true},
+    {id:"infill",n:"Hard gel infill",d:"90 min",p:110,sample:true}]},
+  {cat:"Spa pedicure",items:[
+    {id:"lux",n:"Luxury spa pedicure",d:"90 min · hot stone massage, steam mask, gel polish and a drink",p:179}]},
+  {cat:"Lashes",items:[
+    {id:"lash",n:"Lash lift",d:"60 min",p:95,sample:true}]}
+];
+const days=["Tue","Wed","Thu","Fri","Sat"],dates=["29 Sep","30 Sep","1 Oct","2 Oct","3 Oct"];
+const times=["9:00","10:30","11:45","1:00","2:15","3:30","4:45","5:30"],taken=["10:30","2:15"];
+const names=["Choose a treatment","Date and time","Your details","Pay deposit"];
+const s={step:0,svc:null,day:null,time:null,name:"",phone:""};
+const panel=document.getElementById("panel");
+const all=services.flatMap(c=>c.items);
+const fmt=n=>"$"+n;
+
+function render(){
+  document.querySelectorAll(".steps li").forEach((li,i)=>li.classList.toggle("on",i<=Math.min(s.step,3)));
+  document.getElementById("stepname").textContent=s.step<4?`Step ${s.step+1} of 4 · ${names[s.step]}`:"Booked";
+  const svc=all.find(x=>x.id===s.svc);
+  let h="";
+  if(s.step===0){
+    h="<h2>What are we doing today?</h2>";
+    services.forEach(c=>{
+      h+=`<div class="cat">${c.cat}</div>`;
+      c.items.forEach(x=>{h+=`<button class="svc" data-svc="${x.id}" aria-pressed="${s.svc===x.id}"><span class="n">${x.n}</span><span class="p num">${fmt(x.p)}</span><span class="d">${x.d}${x.sample?"<em>sample</em>":""}</span></button>`});
+    });
+    h+=`<button class="primary" data-go="1" ${s.svc?"":"disabled"}>Continue</button>`;
+  }else if(s.step===1){
+    h=`<h2>When suits you?</h2><div class="days" role="group" aria-label="Day">`+
+      days.map((d,i)=>`<button class="day" data-day="${i}" aria-pressed="${s.day===i}"><small>${d}</small>${dates[i].split(" ")[0]}</button>`).join("")+`</div>`;
+    if(s.day!==null){
+      h+=`<div class="slots" role="group" aria-label="Time">`+times.map(t=>`<button class="slot" data-time="${t}" aria-pressed="${s.time===t}" ${taken.includes(t)?`disabled aria-label="${t} unavailable"`:""}>${t}</button>`).join("")+`</div>`;
+    }
+    h+=`<button class="primary" data-go="2" ${s.time?"":"disabled"}>Continue</button><button class="link" data-go="0">Back</button>`;
+  }else if(s.step===2){
+    h=`<h2>Almost there</h2>
+      <label for="nm">Full name<input id="nm" autocomplete="name" value="${s.name}" placeholder="e.g. Olivia Park"></label>
+      <label for="ph">Mobile for SMS confirmation<input id="ph" type="tel" inputmode="tel" autocomplete="tel" value="${s.phone}" placeholder="04xx xxx xxx"></label>
+      <button class="primary" data-go="3" id="next3" ${s.name&&s.phone?"":"disabled"}>Continue to payment</button><button class="link" data-go="1">Back</button>`;
+  }else if(s.step===3){
+    const dep=Math.round(svc.p*0.3);
+    h=`<h2>Review and pay</h2>
+      <div class="summary">
+        <div><span>${svc.n}</span><span class="num">${fmt(svc.p)}</span></div>
+        <div><span>${days[s.day]} ${dates[s.day]} · ${s.time}</span><span></span></div>
+        <div class="tot"><span>Deposit to secure your booking</span><span class="num">${fmt(dep)} AUD</span></div>
+      </div>
+      <button class="applepay" data-pay aria-label="Pay with Apple Pay"><svg viewBox="0 0 170 200" aria-hidden="true"><path d="M150 67c-1 1-19 11-19 33 0 26 23 35 23 35s-4 13-12 25c-7 11-15 21-27 21s-15-7-29-7c-13 0-18 7-29 7s-19-10-27-22C19 144 11 124 11 104c0-31 20-48 40-48 11 0 20 7 27 7 6 0 17-8 29-8 5 0 21 0 33 12zM109 39c5-6 9-15 9-24 0-1 0-2-1-3-8 0-18 5-24 12-5 6-10 15-10 24v3h3c7 0 17-5 23-12z"/></svg>Pay</button>
+      <div class="or">or</div>
+      <button class="primary ghost" data-pay>Pay by card</button>
+      <div class="secure">Secure payment · your card is never stored by the salon</div>
+      <button class="link" data-go="2">Back</button>`;
+  }else{
+    h=`<div class="done"><div class="ring">✓</div><h2>See you ${days[s.day]} ${dates[s.day]} at ${s.time}</h2>
+      <p>Level 1, 179 Little Bourke St. A confirmation and reminder will arrive by SMS.</p></div>
+      <button class="link" data-reset>Restart demo</button>`;
+  }
+  panel.innerHTML=h;
+  const nm=document.getElementById("nm"),ph=document.getElementById("ph");
+  if(nm){const upd=()=>{s.name=nm.value.trim();s.phone=ph.value.trim();document.getElementById("next3").disabled=!(s.name&&s.phone)};nm.oninput=upd;ph.oninput=upd;}
+}
+panel.addEventListener("click",e=>{
+  const b=e.target.closest("button");if(!b)return;
+  const d=b.dataset;
+  if(d.svc){s.svc=d.svc}
+  else if(d.day){s.day=+d.day;s.time=null}
+  else if(d.time){s.time=d.time}
+  else if(d.go){s.step=+d.go}
+  else if("pay" in d){s.step=4}
+  else if("reset" in d){Object.assign(s,{step:0,svc:null,day:null,time:null,name:"",phone:""})}
+  const key=d.svc?"svc":d.day?"day":d.time?"time":null,val=key&&d[key];
+  render();
+  if(key){const again=panel.querySelector(`[data-${key}="${val}"]`);again&&again.focus()}
+});
+render();
+</script>
