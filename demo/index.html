@@ -3,25 +3,36 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Nails&amp;Gel · Book an appointment</title>
-<meta name="description" content="Book at Nails&amp;Gel, luxury nail bar &amp; spa and Korean hard-gel specialists in Melbourne CBD since 2017.">
-<meta name="theme-color" content="#F5ECE8" media="(prefers-color-scheme: light)">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Korean Nail Salon Melbourne CBD · Hard Gel &amp; BIAB · Nails&amp;Gel</title>
+<meta name="description" content="Korean hard-gel specialists in Melbourne CBD since 2016. Hard gel, BIAB and gel manicures, spa pedicures and nail art. Level 1, 179 Little Bourke St. Book online.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_AU">
+<meta property="og:site_name" content="Nails&amp;Gel">
+<meta property="og:title" content="Nails&amp;Gel · Korean nail salon, Melbourne CBD">
+<meta property="og:description" content="Korean hard-gel specialists in Melbourne CBD since 2016. Hard gel, BIAB and gel manicures, spa pedicures and nail art. Level 1, 179 Little Bourke St. Book online.">
+<meta name="theme-color" content="#FDF9F8" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#161111" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&amp;family=Instrument+Serif:ital@0;1&amp;display=swap">
 <link rel="stylesheet" href="assets/style.css">
+<!-- JSON-LD is a data block, not an executed script, so script-src 'self' does not block it.
+     No aggregateRating and no openingHours until live Google data and confirmed hours exist. -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"NailSalon","name":"Nails&Gel","description":"Luxury nail bar and spa. Korean hard-gel specialists in Melbourne CBD.","foundingDate":"2016","address":{"@type":"PostalAddress","streetAddress":"Level 1, 179 Little Bourke St","addressLocality":"Melbourne","addressRegion":"VIC","postalCode":"3000","addressCountry":"AU"},"sameAs":["https://www.instagram.com/nailangelmelbourne/"]}
+</script>
+<script src="assets/app.js" defer></script>
 </head>
 <body>
 <!--BODY-->
-<button type="button" class="skip" data-skip>Skip to booking</button>
-<div class="maison">
+<a class="skip" href="#main">Skip to booking</a>
+<div class="maison" data-step="0">
   <header class="mast">
-    <p class="addr-top">Level 1 · 179 Little Bourke St</p>
-    <p class="wordmark">Nails<span class="amp">&amp;</span>Gel</p>
-    <div class="rule" aria-hidden="true"><i></i></div>
-    <p class="tagline"><span>Luxury nail bar &amp; spa</span> · <span>Melbourne CBD</span> · <span>Est. 2017</span></p>
-    <p class="spec">Korean hard-gel specialists</p>
+    <a class="wordmark" href="./" data-reset aria-label="Nails&amp;Gel, start a new booking">Nails<span class="amp">&amp;</span>Gel</a>
+    <p class="tagline"><span>Luxury nail bar &amp; spa</span><span>Melbourne CBD</span><span>Est. 2016</span></p>
+    <p class="subtitle">Korean hard-gel specialists</p>
   </header>
   <nav class="progress" id="progress" aria-label="Booking steps"></nav>
   <div class="layout" id="layout">
@@ -30,12 +41,31 @@
   </div>
   <footer class="foot">
     <span class="fw">Nails<i>&amp;</i>Gel</span>
-    <span>Level 1, 179 Little Bourke St, Melbourne VIC 3000</span>
+    <a href="https://www.google.com/maps/search/?api=1&amp;query=Level%201%2C%20179%20Little%20Bourke%20St%2C%20Melbourne%20VIC%203000" target="_blank" rel="noopener noreferrer">Level 1, 179 Little Bourke St, Melbourne <span class="nowrap">VIC 3000</span><span class="sr-only"> (map, opens in a new tab)</span></a>
     <span>Closed Mondays · All times Melbourne time</span>
+    <span class="foot-links">
+      <a href="https://www.instagram.com/nailangelmelbourne/" target="_blank" rel="noopener noreferrer">Instagram<span class="sr-only"> (opens in a new tab)</span></a>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=Nail%26Gel%20179%20Little%20Bourke%20St%20Melbourne" target="_blank" rel="noopener noreferrer">Google reviews<span class="sr-only"> (opens in a new tab)</span></a>
+      <button type="button" class="textlink" data-note="E-gift vouchers" data-target="footnote">E-gift vouchers</button>
+      <button type="button" class="textlink" data-note="Code balance check" data-target="footnote">Check a code balance</button>
+    </span>
+    <span class="inline-note" id="footnote" aria-live="polite"></span>
   </footer>
 </div>
+<div class="bar" id="bar" role="region" aria-label="Current booking" hidden>
+  <button type="button" class="bar-sum" data-action="open-sheet" aria-haspopup="dialog" aria-controls="sheet">
+    <span class="bar-t"></span>
+    <span class="bar-s"></span>
+  </button>
+  <button type="button" class="bar-cta" hidden>Continue</button>
+  <p class="bar-due" hidden>Due today <b class="num">$30</b></p>
+</div>
+<dialog class="sheet" id="sheet" aria-labelledby="sheet-h">
+  <h2 id="sheet-h">Your booking</h2>
+  <div id="sheet-body" class="sheet-body"></div>
+  <button type="button" class="btn ghost" data-action="close-sheet">Close</button>
+</dialog>
 <div id="live" class="sr-only" aria-live="polite" aria-atomic="true"></div>
-<script src="assets/app.js"></script>
 <!--/BODY-->
 </body>
 </html>
