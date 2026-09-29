@@ -86,11 +86,14 @@ The demo is static and takes no money, so the controls below live on the server 
 | Express manicure | `express-manicure.jpg` | |
 | Deluxe manicure | `deluxe-manicure.jpg` | |
 | Shellac manicure | `shellac-manicure.jpg` | |
-| BIAB manicure | `chrome-hires.jpg` (new, from `images/16.webp`) | Shown: pearl chrome finish |
-| BIAB $119 Special | `biab-pink.jpg` | Shown: sheer pink finish |
-| Hard gel manicure | `biab-cateye.jpg` | Shown: cat eye finish, available on hard gel |
-| Hard gel · Simple design | `biab-glitter.jpg` | Shown: glitter ombré, a simple design |
-| Monthly design / Custom design / Nail Biting Correction / Removal | Blush plate ("Monthly", "Custom", "Program", "Removal") | Monthly design links to Instagram |
+| BIAB manicure | `biab-grid.jpg` (salon's own BIAB photo) | |
+| BIAB $119 Special | `biab-special.jpg` (salon's own) | |
+| Hard gel manicure | `hard-gel.jpg` (salon's own) | |
+| Hard gel · Simple design | `simple-design.jpg` (salon's own) | |
+| Hard gel · Monthly design | `monthly-design.jpg` (salon's own) | Links to Instagram |
+| Hard gel · Custom design | `custom-design.jpg` (salon's own) | |
+| Nail Biting Correction Program | `nail-biting.jpg` (salon's before/after) | |
+| Removal only | Blush plate ("Removal"), no photo on the original site either | |
 | 1+1 Deluxe Pedicure | `pedi-nude-toes.jpg` (new crop) | |
 | Express pedicure | `pedi-red-toes.jpg` (new crop) | |
 | Deluxe pedicure (4 tiers) | `mani-pedi-nude.jpg` | Shown with a matching manicure, which is booked separately |
@@ -117,7 +120,7 @@ Alt text describes only what's visible and never claims a product ("gel", not "h
 4. **Opening hours.** Only "Closed Mondays" is published. Is it Tue–Sun, 9 am–7 pm?
 5. **Logo.** The photos read "NAIL&GEL · ESTD 2017", but the site uses Nails&Gel · Est. 2016 as instructed. Should the logo artwork be updated?
 6. **Google reviews.** Can author names be shortened (for example to first name only) under Google's terms, or must they be shown as returned? What is the Place ID?
-7. **Photos.** Can the salon supply originals for Monthly design (monthly), Custom design, Nail Biting Correction and the pedicure tiers, to replace the plates?
+7. **Photos.** Can the salon supply high-resolution originals for all service photos (the current ones are cropped from screenshots), and photos for the pedicure tiers?
 8. **BIAB $119 Special.** It's listed as $129 card / $119 cash. Is that right, given the name?
 9. **1+1 Deluxe Pedicure.** It's "valid until 15 Oct". Which year, and should the card hide itself automatically after that date?
 10. **Extensions, nail art, cat eye / chrome.** How are these booked and priced? Acuity has no add-on for them.
